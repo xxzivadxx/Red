@@ -109,8 +109,8 @@ namespace Net {
 			case ENET_EVENT_TYPE_RECEIVE:
 				if(DEBUG_SERVER)
 					fprintf(stdout,"A packet of length %u was received from %s on channel %u.\n",
-				event.packet -> dataLength,
-				event.peer -> data,
+				(unsigned int) event.packet -> dataLength,
+				(char*) event.peer -> data,
 				event.channelID);
 				paquete = new CPaquete(DATOS, event.packet->data, event.packet->dataLength, (CConexion*)event.peer->data, event.channelID);
 				paquetesRecibidos.push_back(paquete);
@@ -119,7 +119,7 @@ namespace Net {
 	           
 			case ENET_EVENT_TYPE_DISCONNECT:
 				if(DEBUG_SERVER)
-					fprintf(stdout,"%s disconected.\n", event.peer -> data);
+					fprintf(stdout,"%s disconected.\n", (char*) event.peer -> data);
 				paquete = new CPaquete(DESCONEXION,0,0,(CConexion*)event.peer->data,0);
 				paquetesRecibidos.push_back(paquete);
 				disconnectReceived((CConexion*)event.peer->data);

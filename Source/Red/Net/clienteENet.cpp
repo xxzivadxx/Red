@@ -66,7 +66,7 @@ namespace Net {
 
 	CConexion* CClienteENet::connect(char* address, int port, int channels, unsigned int timeout)
 	{
-		if(estado = NO_INIT)
+		if(estado == NO_INIT)
 			return NULL;
 
 		ENetAddress _address;
@@ -153,8 +153,8 @@ namespace Net {
 				case ENET_EVENT_TYPE_RECEIVE:
 					if(DEBUG_CLIENT)
 						printf ("A packet of length %u was received from %s on channel %u.\n",
-							event.packet -> dataLength,
-							event.peer -> data,
+							(unsigned int)event.packet -> dataLength,
+							(char*) event.peer -> data,
 							event.channelID);
 					
 
